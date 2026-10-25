@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Meal Collection</title>
+    
+    <style>
+            :root {
+                --coconut-white: #FAF8F5;
+                --coconut-brown: #4A3022;
+                --coconut-light-brown: #8C6A5D;
+                /* Menü üzerine gelince beliren açık kahve tonu */
+            }
+
+            body {
+                background-color: var(--coconut-white);
+                color: var(--coconut-brown);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                /* Footer her zaman en altta */
+            }
+
+            /* Üst Menü (Navbar) Tasarımı */
+            header {
+                background-color: var(--coconut-brown);
+                padding: 15px 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+            }
+
+            nav ul li {
+                display: inline;
+                margin: 0 15px;
+            }
+
+            nav ul li a {
+                color: var(--coconut-white);
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 16px;
+                padding: 8px 16px;
+                border-radius: 4px;
+                transition: background-color 0.3s ease;
+            }
+
+            nav ul li a:hover {
+                background-color: var(--coconut-light-brown);
+            }
+
+            main {
+                flex: 1;
+                /* İçeriğin ekranı kaplamasını ve footer'ı aşağı itmesini sağlar */
+                padding: 30px 20px;
+                max-width: 900px;
+                margin: 0 auto;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            footer {
+                background-color: var(--coconut-brown);
+                color: var(--coconut-white);
+                text-align: center;
+                padding: 20px 0;
+                margin-top: auto;
+                font-size: 14px;
+            }
+    </style>
+</head>
+
+<body>
+    
+    
+    <header>
+        <nav>
+            <ul>
+                <!-- MVC Routing Linkleri -->
+                <li><a asp-controller="Home" asp-action="Index">HOME PAGE</a></li>
+                <li><a asp-controller="Home" asp-action="AllOrders">ALL MEAL ORDERS</a></li>
+                <li><a asp-controller="Home" asp-action="CollectMeal">COLLECT MEAL</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Diğer View'ların (Index, AllOrders vs.) render edileceği gövde alanı -->
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <!-- Footer Düzeni -->
+    <footer>
+        
+        Ayşem AKŞIT- B241202371
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

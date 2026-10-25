@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Collect Meal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div
+    style="background-color: var(--coconut-white); padding: 30px; border: 1px solid var(--coconut-brown); border-radius: 8px; max-width: 500px; margin: 0 auto; text-align: center;">
+    <h2 style="color: var(--coconut-brown);">Collect Your Meal</h2>
+    <p>Please enter your Order ID to collect your meal.</p>
+
+    <!-- Form, HomeController içindeki [HttpPost] CollectMeal metoduna gidecek -->
+    <form asp-action="CollectMeal" method="post" style="margin-top: 20px;">
+        <div style="margin-bottom: 15px;">
+            <label for="OrderID" style="font-weight: bold; display: block; margin-bottom: 5px;">Order ID:</label>
+            <!-- Name özelliği "OrderID" olmalı ki Controller'daki parametre ile eşleşsin -->
+            <input type="text" id="OrderID" name="OrderID" required placeholder="e.g. O001"
+                   style="padding: 10px; width: 80%; border: 1px solid var(--coconut-brown); border-radius: 4px;" />
+        </div>
+        
+        <button type="submit"
+                style="background-color: var(--coconut-brown); color: white; padding: 10px 20px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; font-weight: bold;">
+            Collect Meal
+        </button>
+    </form>
+</div>

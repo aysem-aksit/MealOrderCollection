@@ -1,0 +1,52 @@
+<!-- En üste bu sayfaya bir Liste halinde MealOrder verisi geleceğini söylüyoruz -->
+@model List<MealOrder>
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align: center; margin-bottom: 30px;">
+    <!-- ViewBag ile Controller'dan yolladığımız adı ve tarihi ekrana basıyoruz -->
+    <h2>@ViewBag.CafeteriaName</h2>
+    <p><strong>Today's Date:</strong> @ViewBag.CurrentDate</p>
+</div>
+
+<div
+    style="background-color: var(--coconut-white); padding: 20px; border: 1px solid var(--coconut-brown); border-radius: 8px;">
+    <h3>Collected Meals Summary</h3>
+    <!-- Model.Count ile gönderilen listedeki (teslim alınmış) yemek sayısını yazdırıyoruz -->
+    <p><strong>Total Collected Meals:</strong> @Model.Count</p>
+
+    <hr />
+
+    <!-- Eğer listede veri varsa bu tabloyu çiz -->
+    @if (Model.Count > 0)
+    {
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+            <thead>
+                <tr style="background-color: var(--coconut-brown); color: white;">
+                    <th style="padding: 10px; border: 1px solid #ccc;">Order ID</th>
+                    <th style="padding: 10px; border: 1px solid #ccc;">Student Name</th>
+                    <th style="padding: 10px; border: 1px solid #ccc;">Meal Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Listedeki her bir yemek için (foreach) yeni bir satır (tr) oluşturuyoruz -->
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ccc; text-align: center;">@order.OrderID</td>
+                        <td style="padding: 10px; border: 1px solid #ccc;">@order.StudentName</td>
+                        <td style="padding: 10px; border: 1px solid #ccc;">@order.MealName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <!-- Listede hiç veri yoksa bu yazıyı göster -->
+        <p>No meals have been collected yet.</p>
+    }
+</div>

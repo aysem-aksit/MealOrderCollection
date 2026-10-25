@@ -1,0 +1,49 @@
+@model List<MealOrder>
+
+@{
+    ViewData["Title"] = "All Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div
+    style="background-color: var(--coconut-white); padding: 20px; border: 1px solid var(--coconut-brown); border-radius: 8px;">
+    <h2 style="text-align: center; color: var(--coconut-brown);">All Meal Orders</h2>
+
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+        <thead>
+            <tr style="background-color: var(--coconut-brown); color: white;">
+                <th style="padding: 10px; border: 1px solid #ccc;">Order ID</th>
+                <th style="padding: 10px; border: 1px solid #ccc;">Student Name</th>
+                <th style="padding: 10px; border: 1px solid #ccc;">Meal Name</th>
+                <th style="padding: 10px; border: 1px solid #ccc;">Status</th>
+                <th style="padding: 10px; border: 1px solid #ccc;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ccc; text-align: center;">@order.OrderID</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">@order.StudentName</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">@order.MealName</td>
+                    
+                    <!-- Teslim durumunu (Collected veya Not Collected) gösteriyoruz -->
+                    <td
+                        style="padding: 10px; border: 1px solid #ccc; text-align: center; color: @(order.Collected ? "green" : "red");">
+                        @(order.Collected ? "Collected" : "Not Collected")
+                    </td>
+                    
+                    <!-- Sipariş detay sayfasına giden ve OrderID'yi parametre olarak taşıyan link -->
+                    <td style="padding: 10px; border: 1px solid #ccc; text-align: center;">
+                        <a asp-action="CollectionInfo" asp-route-id="@order.OrderID"
+                           style="color: var(--coconut-brown); font-weight: bold;">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Toplam sipariş sayısını gösteriyoruz -->
+    <p style="font-weight: bold; text-align: right;">Total Orders: @Model.Count</p>
+</div>

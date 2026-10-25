@@ -1,0 +1,43 @@
+<!-- Bu sayfaya liste değil, tek bir MealOrder nesnesi gelecek -->
+@model MealOrder
+
+@{
+    ViewData["Title"] = "Collection Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div
+    style="background-color: var(--coconut-white); padding: 30px; border: 1px solid var(--coconut-brown); border-radius: 8px; max-width: 600px; margin: 0 auto;">
+    <h2
+        style="color: var(--coconut-brown); text-align: center; border-bottom: 2px solid var(--coconut-brown); padding-bottom: 10px;">
+        Order Details</h2>
+
+        <!-- Eğer URL'den yanlış/olmayan bir Order ID girilirse programın çökmemesi için kontrol -->
+        @if (Model == null)
+        {
+            <p style="color: red; text-align: center;">Order not found. Please check the Order ID.</p>
+        }
+        else
+        {
+            <ul style="list-style-type: none; padding: 0; font-size: 18px;">
+                <li style="margin-bottom: 10px;"><strong>Order ID:</strong> @Model.OrderID</li>
+                <li style="margin-bottom: 10px;"><strong>Student Name:</strong> @Model.StudentName</li>
+                <li style="margin-bottom: 10px;"><strong>Meal Name:</strong> @Model.MealName</li>
+            
+                <!-- Eğer yemek teslim alındıysa tarih göster, alınmadıysa istenen mesajı göster -->
+                @if (Model.Collected)
+                {
+                    <li style="margin-bottom: 10px; color: green;"><strong>Status:</strong> Collected</li>
+                    <li style="margin-bottom: 10px;"><strong>Collected At:</strong> @Model.CollectedAt</li>
+                }
+                else
+                {
+                    <li style="margin-bottom: 10px; color: red;"><strong>Status:</strong> Not Collected</li>
+                    <li
+                        style="margin-top: 20px; font-weight: bold; text-align: center; background-color: #ffe6e6; padding: 10px; border-radius: 5px;">
+                        This meal has not been collected yet.
+                    </li>
+                }
+            </ul>
+        }
+    </div>
